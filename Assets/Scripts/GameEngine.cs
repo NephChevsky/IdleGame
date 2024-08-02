@@ -21,6 +21,11 @@ public class GameEngine : MonoBehaviour
     {
         Player.Move();
 
+        foreach (GameObject enemy in Enemies)
+        {
+            enemy.GetComponent<Enemy>().Move();
+        }
+
         SpawnTimer += Time.fixedDeltaTime * Settings.Time.GameSpeed;
         if ((RemainingEnemies.Count > 1 && SpawnTimer > Settings.Time.SpawnTime) || (RemainingEnemies.Count == 1 && Enemies.Count == 0 && SpawnTimer > Settings.Time.SpawnTime))
         {
@@ -44,7 +49,7 @@ public class GameEngine : MonoBehaviour
         Enemies.Clear();
 
         int mapLevel = PlayerPrefs.GetInt("MapLevel", 1);
-        for (int i = 0; i < 10 + Mathf.CeilToInt(mapLevel / 10); i++)
+        for (int i = 0; i < 1 /*10 + Mathf.CeilToInt(mapLevel / 10)*/; i++)
         {
             RemainingEnemies.Add(EnemyGenerator.CreateEnemy(mapLevel));
         }

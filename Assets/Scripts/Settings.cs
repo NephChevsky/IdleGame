@@ -2,11 +2,17 @@
 {
     public static GlobalSettings Global = new();
     public static PlayerSettings Player = new();
+    public static TimeSettings Time = new();
 
     public class GlobalSettings
     {
         public float MenuRatio = 0.15f;
         public float GameEngineRatio = 16f / 9f;
+    }
+
+    public class TimeSettings
+    {
+        public float GameSpeed = 10f;
     }
 
     public class PlayerSettings

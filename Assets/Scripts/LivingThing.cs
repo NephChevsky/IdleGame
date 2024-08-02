@@ -1,4 +1,3 @@
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class LivingThing : MonoBehaviour
@@ -18,6 +17,9 @@ public class LivingThing : MonoBehaviour
         {
             direction = Vector3.right;
         }
-        transform.localPosition += (MovementSpeed / 4f) * Time.fixedDeltaTime * Settings.Time.GameSpeed * direction;
+        RectTransform gameEnginePanelRT = transform.parent.GetComponent<RectTransform>();
+        float gameEnginePanelWidth = gameEnginePanelRT.rect.width;
+        Vector3 newPosition = transform.localPosition + (MovementSpeed / 4f) * Time.fixedDeltaTime * Settings.Time.GameSpeed * direction;
+        transform.localPosition = new Vector3(Mathf.Clamp(newPosition.x, -(0.5f - Settings.Global.GameUIBorderRatio) * gameEnginePanelWidth, (0.5f - Settings.Global.GameUIBorderRatio) * gameEnginePanelWidth), newPosition.y, newPosition.z);
     }
 }

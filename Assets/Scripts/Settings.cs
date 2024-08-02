@@ -8,6 +8,7 @@
     {
         public float MenuRatio = 0.15f;
         public float GameEngineRatio = 16f / 9f;
+        public float GameUIBorderRatio = 0.05f;
     }
 
     public class TimeSettings

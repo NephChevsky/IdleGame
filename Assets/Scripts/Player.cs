@@ -32,14 +32,10 @@ public class Player : LivingThing
         ResetPosition();
     }
 
-    void Update()
-    {
-        
-    }
-
     public void ResetPosition()
     {
         RectTransform gameEnginePanelRT = transform.parent.GetComponent<RectTransform>();
-        transform.localPosition = new Vector2( -0.45f * gameEnginePanelRT.rect.width, -0.12f * gameEnginePanelRT.rect.height);
+        RectTransform playerRT = GetComponent<RectTransform>();
+        transform.localPosition = new Vector2( -(0.5f - Settings.Global.GameUIBorderRatio) * gameEnginePanelRT.rect.width, -0.12f * gameEnginePanelRT.rect.height);
     }
 }

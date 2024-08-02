@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 public class GameEngine : MonoBehaviour
 {
@@ -24,6 +25,27 @@ public class GameEngine : MonoBehaviour
         foreach (GameObject enemy in Enemies)
         {
             enemy.GetComponent<Enemy>().Move();
+        }
+
+        Player.AttackTimer += Time.fixedDeltaTime * Settings.Time.GameSpeed;
+        if (Player.AttackTimer > 1f)
+        {
+            GameObject opponent = Player.GetReachableOpponent();
+            if (opponent != null)
+            {
+                Enemy enemy = opponent.GetComponent<Enemy>();
+                if (Player.Attack(enemy))
+                {
+                    Player.AddXP(enemy.XPOnKill);
+                    Enemies.Remove(opponent);
+                    Destroy(opponent);
+                    if (RemainingEnemies.Count == 0)
+                    {
+                        GoToNextMapLevel();
+                    }
+                }
+                Player.AttackTimer -= Mathf.Floor(Player.AttackTimer);
+            }
         }
 
         SpawnTimer += Time.fixedDeltaTime * Settings.Time.GameSpeed;
@@ -54,6 +76,21 @@ public class GameEngine : MonoBehaviour
             RemainingEnemies.Add(EnemyGenerator.CreateEnemy(mapLevel));
         }
         RemainingEnemies.Add(EnemyGenerator.CreateBoss(mapLevel));
+    }
+
+    void ResetGame()
+    {
+        GenerateMap();
+        Player.ResetPosition();
+        Player.CurrentHP = Player.MaxHP;
+        Player.AttackTimer = 0;
+        SpawnTimer = 0;
+    }
+
+    void GoToNextMapLevel()
+    {
+        PlayerPrefs.SetInt("MapLevel", PlayerPrefs.GetInt("MapLevel", 1) + 1);
+        ResetGame();
     }
 
     void SpawnEnemy()

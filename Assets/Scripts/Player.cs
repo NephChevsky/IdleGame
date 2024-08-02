@@ -30,6 +30,24 @@ public class Player : LivingThing
         ResetPosition();
     }
 
+    public void AddXP(float xp)
+    {
+        XP += xp;
+        if (XP >= MaxXP)
+        {
+            LevelUp();
+        }
+    }
+
+    public void LevelUp()
+    {
+        Level++;
+        XP -= MaxXP;
+        MaxXP = Settings.Player.BaseXP * Mathf.Pow(Settings.Player.XPGrowth, Level - 1);
+        MaxHP = Settings.Player.BaseHP * Level;
+        BaseAttack = Settings.Player.BaseAttack * Level;
+    }
+
     public void ResetPosition()
     {
         RectTransform gameEnginePanelRT = transform.parent.GetComponent<RectTransform>();

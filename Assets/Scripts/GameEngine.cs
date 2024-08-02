@@ -10,7 +10,9 @@ public class GameEngine : MonoBehaviour
 
     private List<GameObject> Enemies = new();
     private List<GameObject> RemainingEnemies = new();
+
     private float SpawnTimer = Settings.Time.SpawnTime;
+    private float DeathTimer = 0;
 
     void Start()
     {
@@ -45,6 +47,25 @@ public class GameEngine : MonoBehaviour
                     }
                 }
                 Player.AttackTimer -= Mathf.Floor(Player.AttackTimer);
+            }
+        }
+
+        foreach (GameObject enemy in Enemies)
+        {
+            LivingThing enemyLT = enemy.GetComponent<LivingThing>();
+            enemyLT.AttackTimer += Time.fixedDeltaTime * Settings.Time.GameSpeed;
+            if (enemyLT.AttackTimer > 1)
+            {
+                GameObject opponent = enemyLT.GetReachableOpponent();
+                if (opponent != null)
+                {
+                    enemyLT.AttackTimer -= Mathf.Floor(enemyLT.AttackTimer);
+                    if (enemyLT.Attack(Player))
+                    {
+                        DeathTimer = Settings.Time.DeathScreenTime;
+                        break;
+                    }
+                }
             }
         }
 

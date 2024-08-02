@@ -17,6 +17,7 @@
     {
         public float GameSpeed = 1f;
         public float SpawnTime = 1f;
+        public float DeathScreenTime = 2f;
     }
 
     public class PlayerSettings

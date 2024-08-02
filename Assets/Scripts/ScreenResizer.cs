@@ -35,7 +35,8 @@ public class ScreenResizer : MonoBehaviour
         RectTransform gameEnginePanelRT = GameEnginePanel.GetComponent<RectTransform>();
         RectTransform menuItemPanelRT = MenuItemPanel.GetComponent<RectTransform>();
 
-        bool horizontalScreen = Screen.height * (1 - Settings.Global.MenuRatio * Settings.Global.GameEngineRatio) < Screen.width;
+        bool horizontalScreen = Screen.height * 0.8f < Screen.width;
+        float oldGameEngineWidth = gameEnginePanelRT.rect.width;
 
         if (horizontalScreen)
         {
@@ -80,6 +81,15 @@ public class ScreenResizer : MonoBehaviour
             gameEnginePanelRT.anchorMax = new Vector2(1f, 1f);
             menuItemPanelRT.anchorMin = new Vector2(0f, 0f);
             menuItemPanelRT.anchorMax = new Vector2(1f, verticalRatio);
+        }
+
+        float gameEnginePanelWidth = gameEnginePanelRT.rect.width;
+        float gameEnginePanelHeight = gameEnginePanelRT.rect.height;
+        LivingThing[] livingThings = gameEnginePanelRT.GetComponentsInChildren<LivingThing>();
+        foreach (LivingThing lt in livingThings)
+        {
+            lt.transform.localScale = new Vector2(gameEnginePanelWidth / 600f, gameEnginePanelWidth / 600f);
+            lt.transform.localPosition = new Vector2(lt.transform.localPosition.x * oldGameEngineWidth / gameEnginePanelWidth, -0.12f * gameEnginePanelHeight);
         }
     }
 }

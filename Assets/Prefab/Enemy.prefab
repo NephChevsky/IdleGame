@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 748932604899817809}
   - component: {fileID: 8194533487614230036}
   - component: {fileID: 8283033267542641057}
-  - component: {fileID: 2429359105498755648}
+  - component: {fileID: 8152776876534511308}
   m_Layer: 5
-  m_Name: Player
+  m_Name: Enemy
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 1, b: 0.33333334, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -76,7 +76,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &2429359105498755648
+--- !u!114 &8152776876534511308
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -85,16 +85,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 729894542598302080}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3473891c9fbc0f544b94694b836c88a5, type: 3}
+  m_Script: {fileID: 11500000, guid: c3eadb2e4f5e5024bbd26de3c4756b31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentHP: 300
-  MaxHP: 300
-  MovementSpeed: 100
-  BaseAttack: 3
-  BaseAttackSpeed: 0.5
-  Range: 15
-  AttackTimer: 0.9999999
-  Level: 3
-  XP: 32.400005
-  MaxXP: 33.799995
+  CurrentHP: 0
+  MaxHP: 0
+  MovementSpeed: 0
+  BaseAttack: 0
+  BaseAttackSpeed: 0
+  Range: 0
+  AttackTimer: 0
+  XPOnKill: 0

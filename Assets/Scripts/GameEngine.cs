@@ -92,7 +92,7 @@ public class GameEngine : MonoBehaviour
         Enemies.Clear();
 
         int mapLevel = PlayerPrefs.GetInt("MapLevel", 1);
-        for (int i = 0; i < 1 /*10 + Mathf.CeilToInt(mapLevel / 10)*/; i++)
+        for (int i = 0; i < 10 + Mathf.CeilToInt(mapLevel / 10); i++)
         {
             RemainingEnemies.Add(EnemyGenerator.CreateEnemy(mapLevel));
         }

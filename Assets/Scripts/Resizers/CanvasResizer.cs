@@ -16,19 +16,19 @@ public class ScreenResizer : MonoBehaviour
     void Start()
     {
         OldScreenSize = (Screen.width, Screen.height);
-        ResizeUI();
+        Resize();
     }
     
     void Update()
     {
         if (OldScreenSize != (Screen.width, Screen.height))
         {
-            ResizeUI();
+            Resize();
             OldScreenSize = (Screen.width, Screen.height);
         }
     }
 
-    void ResizeUI()
+    void Resize()
     {
         RectTransform menuPanelRT = MenuPanel.GetComponent<RectTransform>();
         RectTransform globalPanelRT = GlobalPanel.GetComponent<RectTransform>();
@@ -81,15 +81,6 @@ public class ScreenResizer : MonoBehaviour
             gameEnginePanelRT.anchorMax = new Vector2(1f, 1f);
             menuItemPanelRT.anchorMin = new Vector2(0f, 0f);
             menuItemPanelRT.anchorMax = new Vector2(1f, verticalRatio);
-        }
-
-        float gameEnginePanelWidth = gameEnginePanelRT.rect.width;
-        float gameEnginePanelHeight = gameEnginePanelRT.rect.height;
-        LivingThing[] livingThings = gameEnginePanelRT.GetComponentsInChildren<LivingThing>();
-        foreach (LivingThing lt in livingThings)
-        {
-            lt.transform.localScale = new Vector2(gameEnginePanelWidth / 600f, gameEnginePanelWidth / 600f);
-            lt.transform.localPosition = new Vector2(lt.transform.localPosition.x * oldGameEngineWidth / gameEnginePanelWidth, -0.12f * gameEnginePanelHeight);
         }
     }
 }

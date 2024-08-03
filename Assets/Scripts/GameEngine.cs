@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class GameEngine : MonoBehaviour
 {
     public Player Player;
-    public GameObject GameEnginePanel;
     public TMP_Text DeathText;
     public TMP_Text MapLevelText;
     public TMP_Text PlayerLevelText;
@@ -99,7 +98,7 @@ public class GameEngine : MonoBehaviour
     {
         if (DeathTimer > 0)
         {
-            Image panelImage = GameEnginePanel.GetComponent<Image>();
+            Image panelImage = GetComponent<Image>();
             Color color = panelImage.color;
             color.a = DeathTimer / Settings.Time.DeathScreenTime;
             panelImage.color = color;
@@ -114,7 +113,7 @@ public class GameEngine : MonoBehaviour
         else if (DeathTimer == -1f)
         {
             DeathTimer = 0;
-            Image panelImage = GameEnginePanel.GetComponent<Image>();
+            Image panelImage = GetComponent<Image>();
             Color color = panelImage.color;
             color.a = 1;
             panelImage.color = color;

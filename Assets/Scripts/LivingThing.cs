@@ -10,18 +10,11 @@ public class LivingThing : MonoBehaviour
     public float Range;
     public float AttackTimer;
 
-    private bool Moving = true;
-
     public void Move()
     {
-        if (Moving)
-        {
-            Vector3 direction = this is Player ? Vector3.right : Vector3.left;
-            float distance = (MovementSpeed / 200f) * Time.fixedDeltaTime * Settings.Time.GameSpeed;
-            Vector3 newPosition = transform.position + distance * direction;
-            Rigidbody2D rb = GetComponent<Rigidbody2D>();
-            rb.MovePosition(newPosition);
-        }
+        Vector3 direction = this is Player ? Vector3.right : Vector3.left;
+        float distance = MovementSpeed * Time.fixedDeltaTime * Settings.Time.GameSpeed;
+        transform.localPosition = transform.localPosition + distance * direction;
     }
 
     public bool Attack(LivingThing opponent)
@@ -50,15 +43,5 @@ public class LivingThing : MonoBehaviour
             }
         }
         return null;
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        Moving = false;
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        Moving = true;
     }
 }

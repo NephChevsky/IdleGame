@@ -52,6 +52,6 @@ public class Player : LivingThing
     {
         RectTransform gameEnginePanelRT = transform.parent.GetComponent<RectTransform>();
         RectTransform playerRT = GetComponent<RectTransform>();
-        transform.localPosition = new Vector2( -(0.5f - Settings.Global.GameUIBorderRatio) * gameEnginePanelRT.rect.width, -0.12f * gameEnginePanelRT.rect.height);
+        transform.localPosition = new Vector2( (-0.5f + Settings.Global.GameUIBorderRatio) * gameEnginePanelRT.rect.width, -playerRT.rect.height / 2);
     }
 }

@@ -5,13 +5,13 @@ using UnityEngine;
 public class EnemyGenerator : MonoBehaviour
 {
     public GameObject EnemyPrefab;
-    public GameObject GameEnginePanel;
 
     private GameObject CreateEnemy(float hp, float movementSpeed, float attack, float attackSpeed, float range, float xpOnKill)
     {
-        RectTransform gameEnginePanelRT = GameEnginePanel.GetComponent<RectTransform>();
-        GameObject enemyGameObject = Instantiate(EnemyPrefab, GameEnginePanel.transform);
-        enemyGameObject.transform.localPosition = new Vector2((0.5f - Settings.Global.GameUIBorderRatio) * gameEnginePanelRT.rect.width, -0.12f * gameEnginePanelRT.rect.height);
+        RectTransform gameEnginePanelRT = GetComponent<RectTransform>();
+        GameObject enemyGameObject = Instantiate(EnemyPrefab, transform);
+        RectTransform enemyRT = enemyGameObject.GetComponent<RectTransform>();
+        enemyGameObject.transform.localPosition = new Vector2((0.5f - Settings.Global.GameUIBorderRatio) * gameEnginePanelRT.rect.width, -enemyRT.rect.height / 2);
         enemyGameObject.SetActive(false);
         Enemy enemy = enemyGameObject.GetComponent<Enemy>();
         enemy.CurrentHP = hp;

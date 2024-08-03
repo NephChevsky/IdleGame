@@ -2,13 +2,15 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEngine.Rendering.DebugUI;
 
 public class GameEngine : MonoBehaviour
 {
     public Player Player;
     public GameObject GameEnginePanel;
     public TMP_Text DeathText;
+    public TMP_Text MapLevelText;
+    public TMP_Text PlayerLevelText;
+    public TMP_Text PlayerXPText;
 
     private EnemyGenerator EnemyGenerator;
 
@@ -120,6 +122,10 @@ public class GameEngine : MonoBehaviour
             color.a = 0;
             DeathText.color = color;
         }
+
+        MapLevelText.text = $"Map level: {PlayerPrefs.GetInt("MapLevel")}";
+        PlayerLevelText.text = $"Player Level: {Player.Level}";
+        PlayerXPText.text = $"Player XP: {Mathf.CeilToInt(Player.XP)}/{Mathf.CeilToInt(Player.MaxXP)}";
 
         AutoSaveTimer += Time.deltaTime * Settings.Time.GameSpeed;
         if (AutoSaveTimer > Settings.Time.AutoSaveTime)

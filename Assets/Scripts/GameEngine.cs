@@ -1,18 +1,23 @@
-using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using static UnityEngine.Rendering.DebugUI;
 
 public class GameEngine : MonoBehaviour
 {
-    public EnemyGenerator EnemyGenerator;
     public Player Player;
+    public GameObject GameEnginePanel;
+    public TMP_Text DeathText;
+
+    private EnemyGenerator EnemyGenerator;
 
     private List<GameObject> Enemies = new();
     private List<GameObject> RemainingEnemies = new();
 
     private float SpawnTimer = Settings.Time.SpawnTime;
     private float DeathTimer = 0;
+    private float AutoSaveTimer = 0;
 
     void Start()
     {
@@ -22,6 +27,17 @@ public class GameEngine : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (DeathTimer > 0)
+        {
+            DeathTimer -= Time.fixedDeltaTime * Settings.Time.GameSpeed;
+            if (DeathTimer <= 0)
+            {
+                DeathTimer = -1f;
+                GoToPreviousMapLevel();
+            }
+            return;
+        }
+
         Player.Move();
 
         foreach (GameObject enemy in Enemies)
@@ -77,6 +93,48 @@ public class GameEngine : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        if (DeathTimer > 0)
+        {
+            Image panelImage = GameEnginePanel.GetComponent<Image>();
+            Color color = panelImage.color;
+            color.a = DeathTimer / Settings.Time.DeathScreenTime;
+            panelImage.color = color;
+            color = DeathText.color;
+            color.a = 1 - (DeathTimer * Settings.Time.DeathScreenTime / 2);
+            if (color.a < 0)
+            {
+                color.a = 0;
+            }
+            DeathText.color = color;
+        }
+        else if (DeathTimer == -1f)
+        {
+            DeathTimer = 0;
+            Image panelImage = GameEnginePanel.GetComponent<Image>();
+            Color color = panelImage.color;
+            color.a = 1;
+            panelImage.color = color;
+            color = DeathText.color;
+            color.a = 0;
+            DeathText.color = color;
+        }
+
+        AutoSaveTimer += Time.deltaTime * Settings.Time.GameSpeed;
+        if (AutoSaveTimer > Settings.Time.AutoSaveTime)
+        {
+            Save();
+            AutoSaveTimer = 0;
+        }
+    }
+
+    void Save()
+    {
+        PlayerPrefs.SetString("Player", JsonUtility.ToJson(Player));
+        PlayerPrefs.Save();
+    }
+
     void GenerateMap()
     {
         foreach (GameObject enemy in RemainingEnemies)
@@ -106,6 +164,18 @@ public class GameEngine : MonoBehaviour
         Player.CurrentHP = Player.MaxHP;
         Player.AttackTimer = 0;
         SpawnTimer = 0;
+    }
+
+    void GoToPreviousMapLevel()
+    {
+        int mapLevel = PlayerPrefs.GetInt("MapLevel", 1) - 1;
+        if (mapLevel < 1)
+        {
+            mapLevel = 1;
+        }
+        PlayerPrefs.SetInt("MapLevel", mapLevel);
+        ResetGame();
+        Player.CurrentHP = Player.MaxHP;
     }
 
     void GoToNextMapLevel()

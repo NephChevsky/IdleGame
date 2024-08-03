@@ -15,9 +15,10 @@
 
     public class TimeSettings
     {
-        public float GameSpeed = 1f;
+        public float GameSpeed = 10f;
         public float SpawnTime = 1f;
         public float DeathScreenTime = 2f;
+        public float AutoSaveTime = 5f;
     }
 
     public class PlayerSettings

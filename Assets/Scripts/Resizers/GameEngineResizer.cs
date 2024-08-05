@@ -13,15 +13,15 @@ public class GameEngineResizer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        RectTransform rt = GetComponent<RectTransform>();
+        /*RectTransform rt = GetComponent<RectTransform>();
         float gameEnginePanelWidth = rt.rect.width;
         float gameEnginePanelHeight = rt.rect.height;
         LivingThing[] livingThings = GetComponentsInChildren<LivingThing>();
         foreach (LivingThing thing in livingThings)
         {
-            /*RectTransform ltRT = thing.GetComponent<RectTransform>();
+            RectTransform ltRT = thing.GetComponent<RectTransform>();
             thing.transform.localScale = new Vector2(gameEnginePanelWidth / 600f, gameEnginePanelWidth / 600f);
-            thing.transform.localPosition = new Vector2(thing.transform.localPosition.x * oldGameEngineWidth / gameEnginePanelWidth, -25);*/
-        }
+            thing.transform.localPosition = new Vector2(thing.transform.localPosition.x * oldGameEngineWidth / gameEnginePanelWidth, -25);
+        }*/
     }
 }

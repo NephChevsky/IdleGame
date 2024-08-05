@@ -26,8 +26,6 @@ public class Player : LivingThing
             JsonUtility.FromJsonOverwrite(playerJson, this);
             CurrentHP = MaxHP;
         }
-
-        ResetPosition();
     }
 
     public void AddXP(float xp)
@@ -46,12 +44,5 @@ public class Player : LivingThing
         MaxXP = Settings.Player.BaseXP * Mathf.Pow(Settings.Player.XPGrowth, Level - 1);
         MaxHP = Settings.Player.BaseHP * Level;
         BaseAttack = Settings.Player.BaseAttack * Level;
-    }
-
-    public void ResetPosition()
-    {
-        RectTransform gameEnginePanelRT = transform.parent.GetComponent<RectTransform>();
-        RectTransform playerRT = GetComponent<RectTransform>();
-        transform.localPosition = new Vector2( (-0.5f + Settings.Global.GameUIBorderRatio) * gameEnginePanelRT.rect.width, -playerRT.rect.height / 2);
     }
 }

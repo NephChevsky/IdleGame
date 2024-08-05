@@ -47,4 +47,12 @@ public class LivingThing : MonoBehaviour
         }
         return null;
     }
+
+    public void ResetPosition()
+    {
+        RectTransform gameEnginePanelRT = transform.parent.GetComponent<RectTransform>();
+        RectTransform playerRT = GetComponent<RectTransform>();
+        float initialPosition = this is Player ? -1f : 1f;
+        transform.localPosition = new Vector2(initialPosition * (0.5f - Settings.Global.GameUIBorderRatio) * gameEnginePanelRT.rect.width, -playerRT.rect.height / 2);
+    }
 }

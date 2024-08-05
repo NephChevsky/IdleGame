@@ -23,11 +23,15 @@ public class GameEngine : MonoBehaviour
     void Start()
     {
         EnemyGenerator = GetComponent<EnemyGenerator>();
-        GenerateMap();
     }
 
     void FixedUpdate()
     {
+        if (RemainingEnemies.Count == 0)
+        {
+            ResetGame();
+        }
+
         if (DeathTimer > 0)
         {
             DeathTimer -= Time.fixedDeltaTime * Settings.Time.GameSpeed;
@@ -192,6 +196,7 @@ public class GameEngine : MonoBehaviour
     void SpawnEnemy()
     {
         GameObject enemy = RemainingEnemies[0];
+        enemy.GetComponent<Enemy>().ResetPosition();
         enemy.SetActive(true);
         Enemies.Add(enemy);
         RemainingEnemies.RemoveAt(0);

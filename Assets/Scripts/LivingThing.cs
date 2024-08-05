@@ -14,7 +14,7 @@ public class LivingThing : MonoBehaviour
     {
         Vector3 direction = this is Player ? Vector3.right : Vector3.left;
         RectTransform gameEnginePanelRT = transform.parent.GetComponent<RectTransform>();
-        float distance = MovementSpeed * Time.fixedDeltaTime * Settings.Time.GameSpeed;
+        float distance = MovementSpeed * Time.fixedDeltaTime * Settings.Time.GameSpeed * gameEnginePanelRT.rect.width / 1200f;
         float posX = transform.localPosition.x + distance * direction.x;
         posX = Mathf.Clamp(posX, gameEnginePanelRT.rect.width * (-0.5f + Settings.Global.GameUIBorderRatio), gameEnginePanelRT.rect.width * (0.5f - Settings.Global.GameUIBorderRatio));
         transform.localPosition = new Vector3(posX, transform.localPosition.y, transform.localPosition.z);

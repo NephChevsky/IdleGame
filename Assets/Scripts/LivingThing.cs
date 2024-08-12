@@ -17,7 +17,14 @@ public class LivingThing : MonoBehaviour
         float distance = MovementSpeed * Time.fixedDeltaTime * Settings.Time.GameSpeed * gameEnginePanelRT.rect.width / 1200f;
         float posX = transform.localPosition.x + distance * direction.x;
         posX = Mathf.Clamp(posX, gameEnginePanelRT.rect.width * (-0.5f + Settings.Global.GameUIBorderRatio), gameEnginePanelRT.rect.width * (0.5f - Settings.Global.GameUIBorderRatio));
-        transform.localPosition = new Vector3(posX, transform.localPosition.y, transform.localPosition.z);
+        Vector3 localRayEndpoint = new(posX + direction.x * GetComponent<RectTransform>().rect.width / 2f, transform.localPosition.y, transform.localPosition.z);
+        Vector3 worldRayEndpoint = transform.parent.TransformPoint(localRayEndpoint);
+        RaycastHit2D[] hits = new RaycastHit2D[1];
+        Debug.DrawRay(transform.position, worldRayEndpoint - transform.position, Color.red);
+        if (GetComponent<CapsuleCollider2D>().Raycast(direction, hits, Mathf.Abs((worldRayEndpoint - transform.position).x)) == 0)
+        {
+            transform.localPosition = new Vector3(posX, transform.localPosition.y, transform.localPosition.z);
+        }
     }
 
     public bool Attack(LivingThing opponent)

@@ -27,7 +27,7 @@ public class GameEngine : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (RemainingEnemies.Count == 0)
+        if (Enemies.Count == 0 && RemainingEnemies.Count == 0)
         {
             ResetGame();
         }

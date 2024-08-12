@@ -128,7 +128,7 @@ public class GameEngine : MonoBehaviour
 
         MapLevelText.text = $"Map level: {PlayerPrefs.GetInt("MapLevel")}";
         PlayerLevelText.text = $"Player Level: {Player.Level}";
-        PlayerXPText.text = $"Player XP: {Mathf.CeilToInt(Player.XP)}/{Mathf.CeilToInt(Player.MaxXP)}";
+        PlayerXPText.text = $"XP: {Mathf.CeilToInt(Player.XP)}/{Mathf.CeilToInt(Player.MaxXP)}";
 
         AutoSaveTimer += Time.deltaTime * Settings.Time.GameSpeed;
         if (AutoSaveTimer > Settings.Time.AutoSaveTime)

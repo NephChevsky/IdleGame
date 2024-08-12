@@ -647,7 +647,7 @@ MonoBehaviour:
   DeathText: {fileID: 9182809803583002826}
   MapLevelText: {fileID: 7930544385541817221}
   PlayerLevelText: {fileID: 5521717475516493291}
-  PlayerXPText: {fileID: 9182809803583002826}
+  PlayerXPText: {fileID: 27484431677238605}
 --- !u!114 &6205880997436861970
 MonoBehaviour:
   m_ObjectHideFlags: 0

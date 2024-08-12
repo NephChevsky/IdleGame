@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LivingThing : MonoBehaviour
 {
@@ -53,6 +54,18 @@ public class LivingThing : MonoBehaviour
             }
         }
         return null;
+    }
+
+    void Update()
+    {
+        RefreshHP();
+    }
+
+    void RefreshHP()
+    {
+        float ratio = CurrentHP / MaxHP;
+        Image img = GetComponent<Image>();
+        img.color = new Color(this is Player ? 1 - ratio : ratio, this is Player ? ratio : 0, 0, 1);
     }
 
     public void ResetPosition()

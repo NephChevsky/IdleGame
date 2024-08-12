@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -66,6 +67,8 @@ public class LivingThing : MonoBehaviour
         float ratio = CurrentHP / MaxHP;
         Image img = GetComponent<Image>();
         img.color = new Color(this is Player ? 1 - ratio : ratio, this is Player ? ratio : 0, 0, 1);
+        TMP_Text text = GetComponentInChildren<TMP_Text>();
+        text.text = $"{Mathf.RoundToInt(ratio * 100)} %";
     }
 
     public void ResetPosition()

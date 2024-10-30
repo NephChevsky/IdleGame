@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ArmoryHandler : MonoBehaviour
 {
@@ -18,7 +19,9 @@ public class ArmoryHandler : MonoBehaviour
 
     void Start()
     {
-        Helm = Instantiate(ItemSlotPrefab);
+		Image panel = GetComponentInChildren<Image>();
+
+		Helm = Instantiate(ItemSlotPrefab);
 		Amulet = Instantiate(ItemSlotPrefab);
 		Gloves = Instantiate(ItemSlotPrefab);
 		Chest = Instantiate(ItemSlotPrefab);
@@ -42,17 +45,17 @@ public class ArmoryHandler : MonoBehaviour
 		MainHand.name = "MainHand";
 		OffHand.name = "OffHand";
 
-		Helm.transform.SetParent(transform);
-		Amulet.transform.SetParent(transform);
-		Gloves.transform.SetParent(transform);
-		Chest.transform.SetParent(transform);
-		RingL.transform.SetParent(transform);
-		Belt.transform.SetParent(transform);
-		RingR.transform.SetParent(transform);
-		Pants.transform.SetParent(transform);
-		Boots.transform.SetParent(transform);
-		MainHand.transform.SetParent(transform);
-		OffHand.transform.SetParent(transform);
+		Helm.transform.SetParent(panel.transform);
+		Amulet.transform.SetParent(panel.transform);
+		Gloves.transform.SetParent(panel.transform);
+		Chest.transform.SetParent(panel.transform);
+		RingL.transform.SetParent(panel.transform);
+		Belt.transform.SetParent(panel.transform);
+		RingR.transform.SetParent(panel.transform);
+		Pants.transform.SetParent(panel.transform);
+		Boots.transform.SetParent(panel.transform);
+		MainHand.transform.SetParent(panel.transform);
+		OffHand.transform.SetParent(panel.transform);
 
 		Helm.transform.localScale = Vector3.one;
 		Amulet.transform.localScale = Vector3.one;
@@ -87,7 +90,7 @@ public class ArmoryHandler : MonoBehaviour
 
 	void ResizeUI()
 	{
-		RectTransform rt = GetComponent<RectTransform>();
+		RectTransform rt = GetComponentInChildren<Image>().GetComponent<RectTransform>();
 		float standardItemSize = GetItemSlotSize(rt.rect.height);
 
 		RectTransform helmRT = Helm.GetComponent<RectTransform>();

@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 667572356798993235}
+  - component: {fileID: 6243363131077516923}
   m_Layer: 0
   m_Name: Inventory
   m_TagString: Untagged
@@ -36,6 +37,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1080, y: 720}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &6243363131077516923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 470218543067414830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 353865383771d474e8b2eed12786a9d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Rows: 0
+  Columns: 0
+  ItemSlotPrefab: {fileID: 470218543067414830, guid: 056bf1fe08ca6e44da6878f636111bc3, type: 3}
 --- !u!1 &8206702960805446078
 GameObject:
   m_ObjectHideFlags: 0
@@ -47,7 +63,6 @@ GameObject:
   - component: {fileID: 322943807511288910}
   - component: {fileID: 4660341887349185691}
   - component: {fileID: 1867465508937024419}
-  - component: {fileID: 7207379610515604766}
   m_Layer: 0
   m_Name: Panel
   m_TagString: Untagged
@@ -95,7 +110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.26666668, g: 0.26666668, b: 0.26666668, a: 1}
+  m_Color: {r: 0.53333336, g: 0.53333336, b: 0.53333336, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -112,16 +127,3 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7207379610515604766
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8206702960805446078}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2c30445ef325984f9162656fdddd8f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ArmoryPrefab: {fileID: 470218543067414830, guid: 45254529a1f81344d972ca8932771244, type: 3}

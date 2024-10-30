@@ -1,6 +1,7 @@
 public static class Settings
 {
 	public static UI UI = new();
+	public static Engine Engine = new();
 }
 
 public class UI
@@ -17,4 +18,10 @@ public class Menu
 public class Game
 {
 	public float PanelRatio = 16f / 9f;
+}
+
+public class Engine
+{
+	public float TickTime = 0.2f;
+	public int MapLength = 1000;
 }

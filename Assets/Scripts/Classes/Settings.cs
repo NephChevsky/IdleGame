@@ -22,6 +22,6 @@ public class Game
 
 public class Engine
 {
-	public float TickTime = 0.2f;
+	public float TickTime = 0.02f;
 	public int MapLength = 1000;
 }

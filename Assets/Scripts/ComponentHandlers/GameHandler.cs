@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class GameHandler : MonoBehaviour
 {
     public GameObject LivingThingPrefab;
+	public GameObject Map;
 
     private GameObject Player;
 
@@ -26,12 +27,12 @@ public class GameHandler : MonoBehaviour
 
     void ResizeUI()
     {
-		RectTransform rt = GetComponentInChildren<Image>().GetComponent<RectTransform>();
+		RectTransform rt = Map.GetComponent<RectTransform>();
 
 		RectTransform playerRT = Player.GetComponent<RectTransform>();
 		float playerHeight = rt.rect.height / 5f;
 		float playerWidth = playerHeight / 2f;
 		playerRT.sizeDelta = new Vector2(playerWidth, playerHeight);
-		Player.transform.localPosition = new Vector2(-rt.rect.width / 2 + rt.rect.width * 0.02f + GameEngine.Player.Position * rt.rect.width / Settings.Engine.MapLength + playerWidth / 2, -playerHeight / 2);
+		Player.transform.localPosition = new Vector2(-(rt.rect.width - (playerWidth / 2))/ 2 + GameEngine.Player.Position * (rt.rect.width - (playerWidth / 2)) / Settings.Engine.MapLength, -playerHeight / 2);
 	}
 }

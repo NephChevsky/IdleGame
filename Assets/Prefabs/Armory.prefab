@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 667572356798993235}
-  - component: {fileID: 4066762239407736140}
   m_Layer: 0
   m_Name: Armory
   m_TagString: Untagged
@@ -37,19 +36,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 400, y: 800}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &4066762239407736140
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 470218543067414830}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0957933b3f92f1f49b1d4dc6fb01e13d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ItemSlotPrefab: {fileID: 470218543067414830, guid: 056bf1fe08ca6e44da6878f636111bc3, type: 3}
 --- !u!1 &8206702960805446078
 GameObject:
   m_ObjectHideFlags: 0
@@ -61,6 +47,7 @@ GameObject:
   - component: {fileID: 322943807511288910}
   - component: {fileID: 4660341887349185691}
   - component: {fileID: 1867465508937024419}
+  - component: {fileID: 2861548185524419762}
   m_Layer: 0
   m_Name: Panel
   m_TagString: Untagged
@@ -125,3 +112,16 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2861548185524419762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8206702960805446078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0957933b3f92f1f49b1d4dc6fb01e13d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ItemSlotPrefab: {fileID: 470218543067414830, guid: 056bf1fe08ca6e44da6878f636111bc3, type: 3}

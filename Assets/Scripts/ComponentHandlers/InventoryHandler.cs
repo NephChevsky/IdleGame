@@ -26,7 +26,7 @@ public class InventoryHandler : MonoBehaviour
 
 		RectTransform armoryRT = Armory.GetComponent<RectTransform>();
 		float armoryHeight = rt.rect.height;
-		float armoryWidth = Armory.GetComponent<ArmoryHandler>().GetWidth(armoryHeight);
+		float armoryWidth = Armory.GetComponentInChildren<ArmoryHandler>().GetWidth(armoryHeight);
 		armoryRT.sizeDelta = new Vector2(armoryWidth, armoryHeight);
 		Armory.transform.localPosition = new Vector2(-rt.rect.width / 2 + armoryWidth / 2, 0);
 	}

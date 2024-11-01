@@ -1,5 +1,6 @@
 public class LivingThing
 {
+	public int Level = 1;
 	public int Position;
 	public float MovementSpeed = 100f;
 

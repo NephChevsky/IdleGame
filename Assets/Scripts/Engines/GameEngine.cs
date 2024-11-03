@@ -12,7 +12,7 @@ public static class GameEngine
 
 	public static void Init()
 	{
-		Player = new();
+		Player = new(1);
 		Map = MapGenerator.Generate(1);
 	}
 
@@ -38,7 +38,7 @@ public static class GameEngine
 				Move(mob);
 			}
 
-			Player.AttackTimer += Time.fixedDeltaTime;
+			Player.AttackTimer += Settings.Engine.TickTime;
 			if (Player.AttackTimer > 1f)
 			{
 				Mob mob = FindClosestEnemy(Player) as Mob;
@@ -61,6 +61,23 @@ public static class GameEngine
 						}*/
 					}
 					Player.AttackTimer = 0f;
+				}
+			}
+
+			foreach (Mob mob in Map.SpawnedMobs)
+			{
+				mob.AttackTimer += Settings.Engine.TickTime;
+				if (mob.AttackTimer > 1f)
+				{
+					LivingThing thing = FindClosestEnemy(mob);
+					if (thing != null)
+					{
+						mob.AttackTimer = 0f;
+						if (Attack(mob, thing))
+						{
+							break;
+						}
+					}
 				}
 			}
 		}

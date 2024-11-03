@@ -1,5 +1,7 @@
 using System.Linq;
+using UnityEditor.Rendering;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public static class GameEngine
 {
@@ -35,7 +37,56 @@ public static class GameEngine
 			{
 				Move(mob);
 			}
+
+			Player.AttackTimer += Time.fixedDeltaTime;
+			if (Player.AttackTimer > 1f)
+			{
+				Mob mob = FindClosestEnemy(Player) as Mob;
+				if (mob != null)
+				{
+					if (Attack(Player, mob))
+					{
+						/*bool drop = Random.Range(0f, 1f) >= 0.95f;
+						if (drop && Inventory.Count < 10)
+						{
+							Item item = ItemEngine.Generate();
+							Inventory.Add(item);
+						}*/
+						int id = mob.Id;
+						Map.SpawnedMobs.RemoveAll(x => x.Id == id);
+						/*Player.CurrentXP += enemy.XP;
+						if (Player.CurrentXP >= Player.MaxXP)
+						{
+							Player.LevelUp();
+						}*/
+					}
+					Player.AttackTimer = 0f;
+				}
+			}
 		}
+	}
+
+	private static LivingThing FindClosestEnemy(LivingThing thing)
+	{
+		if (thing is Player && Map.SpawnedMobs.Count > 0 && Map.SpawnedMobs[0].Position < Player.Position + Player.AttackRange)
+		{
+			return Map.SpawnedMobs[0];
+		}
+		else if (thing is Mob && Player.Position > thing.Position - thing.AttackRange)
+		{
+			return Player;
+		}
+		return null;
+	}
+
+	private static bool Attack(LivingThing attacker, LivingThing defender)
+	{
+		defender.CurrentHP -= attacker.BaseAttack;
+		if (defender.CurrentHP <= 0)
+		{
+			return true;
+		}
+		return false;
 	}
 
 	private static void Move(LivingThing thing)

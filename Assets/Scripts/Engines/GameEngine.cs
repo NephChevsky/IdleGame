@@ -54,11 +54,11 @@ public static class GameEngine
 						}*/
 						int id = mob.Id;
 						Map.SpawnedMobs.RemoveAll(x => x.Id == id);
-						/*Player.CurrentXP += enemy.XP;
+						Player.CurrentXP += mob.XP;
 						if (Player.CurrentXP >= Player.MaxXP)
 						{
 							Player.LevelUp();
-						}*/
+						}
 					}
 					Player.AttackTimer = 0f;
 				}

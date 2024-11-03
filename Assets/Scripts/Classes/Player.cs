@@ -13,6 +13,12 @@ public class Player : LivingThing
 		CurrentHP = MaxHP;
 	}
 
+	public void LevelUp()
+	{
+		Level++;
+		ComputeStats();
+	}
+
 	public void ComputeStats()
 	{
 		BaseAttack = 1f * (1f + 0.3f * (Level - 1));

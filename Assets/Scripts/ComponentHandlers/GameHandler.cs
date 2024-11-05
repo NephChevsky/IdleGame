@@ -1,16 +1,16 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class GameHandler : MonoBehaviour
 {
     public GameObject LivingThingPrefab;
 	public GameObject Map;
+	public TMP_Text MapLevelText;
+	public TMP_Text PlayerLevelText;
 
-    private GameObject Player;
+	private GameObject Player;
 	private List<GameObject> Mobs = new();
 
     void Start()
@@ -84,6 +84,16 @@ public class GameHandler : MonoBehaviour
 	void ResizeUI()
     {
 		RectTransform rt = Map.GetComponent<RectTransform>();
+
+		MapLevelText.text = $"Map lvl: {GameEngine.Map.Level}";
+		PlayerLevelText.text = $"Player lvl: {GameEngine.Player.Level}";
+
+		float txtWidth = rt.rect.width / 3f;
+		float txtHeight = rt.rect.height / 15f;
+		MapLevelText.rectTransform.sizeDelta = new Vector2(txtWidth, txtHeight);
+		PlayerLevelText.rectTransform.sizeDelta = new Vector2(txtWidth, txtHeight);
+		MapLevelText.transform.localPosition = new Vector2(- rt.rect.width / 2 + txtWidth * 0.5f, rt.rect.height / 2 - txtHeight * 0.5f);
+		PlayerLevelText.transform.localPosition = new Vector2(-rt.rect.width / 2 + txtWidth * 0.5f, rt.rect.height / 2 - txtHeight * 1.5f);
 
 		RectTransform playerRT = Player.GetComponent<RectTransform>();
 		float playerHeight = rt.rect.height / 5f;

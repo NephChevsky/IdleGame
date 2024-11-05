@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEngine.EventSystems.EventTrigger;
 
 public class GameHandler : MonoBehaviour
 {
@@ -22,6 +22,7 @@ public class GameHandler : MonoBehaviour
     void Update()
     {
 		SpawnAndDeSpawn();
+		UpdateHP();
 		ResizeUI();
     }
 
@@ -30,6 +31,7 @@ public class GameHandler : MonoBehaviour
 		if (Player == null)
 		{
 			Player = InstantiateLivingThing();
+			Player.GetComponent<LivingThingHandler>().IsPlayer = true;
 		}
 
 		for (int i = 0; i < Mobs.Count; i++)
@@ -65,6 +67,20 @@ public class GameHandler : MonoBehaviour
 		gameObject.transform.SetParent(panel.transform);
 		gameObject.transform.localScale = Vector3.one;
 		return gameObject;
+	}
+
+	void UpdateHP()
+	{
+		float hpRatio = GameEngine.Player.CurrentHP / GameEngine.Player.MaxHP;
+		Player.GetComponent<LivingThingHandler>().LifeRatio = hpRatio;
+
+		foreach (GameObject mobGameObject in Mobs)
+		{
+			int currentId = int.Parse(mobGameObject.name.Split(" ")[1]);
+			Mob mob = GameEngine.Map.SpawnedMobs.Where(x => x.Id == currentId).First();
+			hpRatio = mob.CurrentHP / mob.MaxHP;
+			mobGameObject.GetComponent<LivingThingHandler>().LifeRatio = hpRatio;
+		}
 	}
 
 	void ResizeUI()

@@ -12,6 +12,8 @@ public static class MobGenerator
 		Mob boss = new(id);
 		boss.Level = level;
 		boss.MovementSpeed = 0f;
+		boss.CurrentHP *= 5f;
+		boss.MaxHP *= 5f;
 		return boss;
 	}
 }

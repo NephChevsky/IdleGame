@@ -14,6 +14,7 @@ public static class GameEngine
 	{
 		Player = new(1);
 		Map = MapGenerator.Generate(1);
+		InitMap();
 	}
 
 	public static void Advance(float elapsedTime)
@@ -22,6 +23,17 @@ public static class GameEngine
 		while (time < elapsedTime)
 		{
 			time += Settings.Engine.TickTime;
+
+			if (Player.CurrentHP <= 0 || (Map.SpawnedMobs.Count == 0 && Map.MobsToSpawn.Count == 0))
+			{
+				int nextMapLevel = Map.Level;
+				if (Map.SpawnedMobs.Count == 0 && Map.MobsToSpawn.Count == 0)
+				{
+					nextMapLevel++;
+				}
+				Map = MapGenerator.Generate(nextMapLevel);
+				InitMap();
+			}
 
 			SpawnTimer += Settings.Engine.TickTime;
 			if (SpawnTimer >= 1f && Map.MobsToSpawn.Count > 0)
@@ -81,6 +93,14 @@ public static class GameEngine
 				}
 			}
 		}
+	}
+
+	private static void InitMap()
+	{
+		Player.Position = 0;
+		Player.AttackTimer = 0f;
+		Player.CurrentHP = Player.MaxHP;
+		SpawnTimer = 0f;
 	}
 
 	private static LivingThing FindClosestEnemy(LivingThing thing)

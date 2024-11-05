@@ -9,11 +9,27 @@ public static class GameEngine
 	public static Map Map;
 
 	public static float SpawnTimer = 1f;
+	public static float SaveTimer = 0f;
 
 	public static void Init()
 	{
-		Player = new(1);
-		Map = MapGenerator.Generate(1);
+		if (PlayerPrefs.HasKey("PlayerLevel"))
+		{
+			Player = new(PlayerPrefs.GetInt("PlayerLevel"));
+		}
+		else
+		{
+			Player = new Player(1);
+		}
+
+		if (PlayerPrefs.HasKey("MapLevel"))
+		{
+			Map = MapGenerator.Generate(PlayerPrefs.GetInt("MapLevel"));
+		}
+		else
+		{
+			Map = MapGenerator.Generate(1);
+		}
 		InitMap();
 	}
 
@@ -92,6 +108,14 @@ public static class GameEngine
 					}
 				}
 			}
+		}
+
+		SaveTimer += elapsedTime;
+		if (SaveTimer > 30f)
+		{
+			SaveTimer = 0f;
+			PlayerPrefs.SetInt("PlayerLevel", Player.Level);
+			PlayerPrefs.SetInt("MapLevel", Map.Level);
 		}
 	}
 

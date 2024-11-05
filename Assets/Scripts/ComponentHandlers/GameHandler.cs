@@ -61,10 +61,8 @@ public class GameHandler : MonoBehaviour
 
 	GameObject InstantiateLivingThing()
 	{
-		Image panel = GetComponentInChildren<Image>();
-
 		GameObject gameObject = Instantiate(LivingThingPrefab);
-		gameObject.transform.SetParent(panel.transform);
+		gameObject.transform.SetParent(Map.transform);
 		gameObject.transform.localScale = Vector3.one;
 		return gameObject;
 	}
@@ -91,7 +89,7 @@ public class GameHandler : MonoBehaviour
 		float playerHeight = rt.rect.height / 5f;
 		float playerWidth = playerHeight / 2f;
 		playerRT.sizeDelta = new Vector2(playerWidth, playerHeight);
-		Player.transform.localPosition = new Vector2(-(rt.rect.width - (playerWidth / 2)) / 2 + GameEngine.Player.Position * (rt.rect.width - (playerWidth / 2)) / Settings.Engine.MapLength, -playerHeight / 2);
+		Player.transform.localPosition = new Vector2(-(rt.rect.width - playerWidth) / 2 + GameEngine.Player.Position * (rt.rect.width - playerWidth) / Settings.Engine.MapLength, -playerHeight / 2);
 
 		foreach (Mob mob in GameEngine.Map.SpawnedMobs)
 		{
@@ -100,7 +98,7 @@ public class GameHandler : MonoBehaviour
 			float mobHeight = rt.rect.height / 5f;
 			float mobWidth = mobHeight / 2f;
 			mobRT.sizeDelta = new Vector2(mobWidth, mobHeight);
-			mobGameObject.transform.localPosition = new Vector2(-(rt.rect.width - (mobWidth / 2)) / 2 + mob.Position * (rt.rect.width - (mobWidth / 2)) / Settings.Engine.MapLength, -mobHeight / 2);
+			mobGameObject.transform.localPosition = new Vector2(-(rt.rect.width - mobWidth) / 2 + mob.Position * (rt.rect.width - mobWidth) / Settings.Engine.MapLength, -mobHeight / 2);
 		}
 	}
 }

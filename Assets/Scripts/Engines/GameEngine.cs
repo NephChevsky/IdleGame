@@ -1,12 +1,15 @@
+using Assets.Scripts.Classes;
+using Assets.Scripts.Engines;
+using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.Rendering;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 public static class GameEngine
 {
 	public static Player Player;
 	public static Map Map;
+	public static List<Item> Inventory { get; set; }
 
 	public static float SpawnTimer = 1f;
 	public static float SaveTimer = 0f;
@@ -29,6 +32,16 @@ public static class GameEngine
 		else
 		{
 			Map = MapGenerator.Generate(1);
+		}
+
+		if (PlayerPrefs.HasKey("Inventory"))
+		{
+			string json = PlayerPrefs.GetString("Inventory");
+			Inventory = JsonConvert.DeserializeObject<List<Item>>(json);
+		}
+		else
+		{
+			Inventory = new();
 		}
 		InitMap();
 	}
@@ -74,12 +87,12 @@ public static class GameEngine
 				{
 					if (Attack(Player, mob))
 					{
-						/*bool drop = Random.Range(0f, 1f) >= 0.95f;
-						if (drop && Inventory.Count < 10)
+						bool drop = Random.Range(0f, 1f) >= 0.95f;
+						if (drop && Inventory.Count < 50)
 						{
 							Item item = ItemEngine.Generate();
 							Inventory.Add(item);
-						}*/
+						}
 						int id = mob.Id;
 						Map.SpawnedMobs.RemoveAll(x => x.Id == id);
 						Player.CurrentXP += mob.XP;
@@ -116,6 +129,8 @@ public static class GameEngine
 			SaveTimer = 0f;
 			PlayerPrefs.SetInt("PlayerLevel", Player.Level);
 			PlayerPrefs.SetInt("MapLevel", Map.Level);
+			string json = JsonConvert.SerializeObject(Inventory);
+			PlayerPrefs.SetString("Inventory", json);
 		}
 	}
 

@@ -36,7 +36,7 @@ public static class GameEngine
 	public static void Advance(float elapsedTime)
 	{
 		float time = 0;
-		while (time < elapsedTime)
+		while (time < elapsedTime * Settings.Engine.GameSpeed)
 		{
 			time += Settings.Engine.TickTime;
 

@@ -71,6 +71,12 @@ public class InventoryHandler : MonoBehaviour
 			RectTransform itemRT = item.GetComponent<RectTransform>();
 			itemRT.sizeDelta = new Vector2(standardItemSize, standardItemSize);
 			item.transform.localPosition = new Vector2(-rt.rect.width / 2 + (column + 0.5f) * standardItemSize, rt.rect.height / 2 - (row + 0.5f) * standardItemSize);
+			int count = row * Columns + (column % Columns);
+			if (GameEngine.Inventory.Count > count)
+			{
+				Image image = item.GetComponentInChildren<Image>();
+				image.color = new Color(0.6f, 0.6f, 0.6f);
+			}
 			column++;
 			if (column >= Columns)
 			{

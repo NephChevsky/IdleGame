@@ -74,8 +74,7 @@ public class InventoryHandler : MonoBehaviour
 			int count = row * Columns + (column % Columns);
 			if (GameEngine.Inventory.Count > count)
 			{
-				Image image = item.GetComponentInChildren<Image>();
-				image.color = new Color(0.6f, 0.6f, 0.6f);
+				item.GetComponent<ItemSlotHandler>().Item = GameEngine.Inventory[count];
 			}
 			column++;
 			if (column >= Columns)
